@@ -1,10 +1,15 @@
 import { View, Text, Button, StyleSheet } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import CustomButton from '../Components/UI/CustomButton';
 
 export default function AcceptanceScreen({ navigation }) {
+    const [name, setName] = useState("AcceptanceScreen");
+
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const [resData, setResData] = useState({});
+    const [currentCell, setCurrentCell] = useState("нет");
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -29,24 +34,47 @@ export default function AcceptanceScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+      <View style={styles.barcodebox}>
+                <BarCodeScanner
+                    onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                    style={{ height: 400, width: 400 }} />
+      </View>
+
+      <View style={styles.info_container}>
+        <Text style={styles.text}>Текущая ячейка:</Text>
+        <Text style={styles.cellText}>{currentCell}</Text>
+      </View>
+
+      {scanned && <CustomButton title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
     </View>
   );
   }
 
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    text: {
+        fontSize: 20,
+    },
+    cellText: {
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+    barcodebox: {
         alignItems: 'center',
         justifyContent: 'center',
+        height: 300,
+        width: 600,
+        overflow: 'hidden',
+        backgroundColor: '#fc0'
     },
-    menuButton: {
-        width: 200,
-        backgroundColor: 'red',
+    info_container:{
+        marginTop: 30,
+        alignItems: 'center'
     }
-})
+});

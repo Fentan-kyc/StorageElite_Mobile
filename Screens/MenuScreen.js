@@ -10,10 +10,8 @@ import Storage from "../Storage/StorageManager";
 import axios from "axios";
 
 export default function MenuScreen({ navigation }) {
-  const name = "Menu";
-
   useEffect(() => {
-    axios("http://192.168.0.101:7448/").then((res) => {
+    axios("http://192.168.1.140:7448/").then((res) => {
       Storage.setData(res.data);
       console.log(`get data: ${res.data}`);
     });
@@ -23,19 +21,19 @@ export default function MenuScreen({ navigation }) {
     <View style={styles.container}>
       <CustomButton
         title="Принять"
-        onPress={() => navigation.navigate(AcceptanceScreen.name)}
+        onPress={() => navigation.navigate("AcceptanceScreen")}
       />
       <CustomButton
         title="Отдать"
-        onPress={() => navigation.navigate(DeliveryScreen.name)}
+        onPress={() => navigation.navigate("DeliveryScreen")}
       />
       <CustomButton
         title="Инвентаризация"
-        onPress={() => navigation.navigate(InventoryScreen.name)}
+        onPress={() => navigation.navigate("InventoryScreen")}
       />
       <CustomButton
         title="Разработчик"
-        onPress={() => navigation.navigate(DevelopScreen.name)}
+        onPress={() => navigation.navigate("DevelopScreen")}
       />
     </View>
   );

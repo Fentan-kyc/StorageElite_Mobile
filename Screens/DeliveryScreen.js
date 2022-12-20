@@ -3,6 +3,5 @@ import { StyleSheet } from "react-native";
 import Storage from "../Storage/StorageManager";
 
 export default function DeliveryScreen({ navigation }) {
-  const name = "Delivery";
   return <Text>{JSON.stringify(Storage.getData())}</Text>;
 }

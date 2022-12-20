@@ -6,8 +6,6 @@ import axios from "axios";
 import Storage from "../Storage/StorageManager";
 
 export default function AcceptanceScreen({ navigation }) {
-  const [name, setName] = useState("AcceptanceScreen");
-
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [resData, setResData] = useState(Storage.getData());
@@ -64,7 +62,7 @@ export default function AcceptanceScreen({ navigation }) {
             Storage.setData(resData);
             console.log("Sending data...");
             axios
-              .post("http://192.168.0.101:7448/", resData)
+              .post("http://192.168.1.140:7448/", resData)
               .then((res) => console.log(res.data));
           }}
         />
